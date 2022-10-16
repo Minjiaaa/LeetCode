@@ -16,9 +16,11 @@ class Solution:
 #         #                                             1, 0, 0, 3, 12
 #         #                                              1, 0, 3, 0, 12   
 #     # 要使用双指针,慢指针只有在满足条件的时候才会往前移动
-        i = 0
-
-        for j in range(len(nums)):
-            if nums[j] != 0:
-                nums[i], nums[j] = nums[j], nums[i]
-                i += 1
+        index = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[index] = nums[i]
+                index += 1
+        
+        for j in range(index, len(nums)):
+            nums[j] = 0
