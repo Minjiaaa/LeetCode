@@ -11,8 +11,9 @@ class Solution:
         while head != None and head.next != None:
             hnext = head.next
             dnext = dummy.next
+            #先分别设定两个节点，然后不要动原来的链表，先设定头指针，注意有些节点断开之后没有指针了。
             dummy.next = hnext
-            head.next = hnext.next
+            head.next = hnext.next #需要使用head这个指针
             hnext.next = dnext
            
         return dummy.next
