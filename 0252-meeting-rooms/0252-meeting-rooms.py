@@ -13,4 +13,4 @@ class Solution:
             if intervals[i][1] > intervals[i + 1][0]:
                 return False
         return True
-        
+        #排序的方法
