@@ -4,6 +4,7 @@
 #         self.val = val
 #         self.next = next
 class Solution:
+    #Recursion
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         def recur(cur, pre):
             #Base Case and also the terminated condition
@@ -14,4 +15,13 @@ class Solution:
             cur.next = pre #修改当前节点指向前面的节点，一直逼近base case
             return res
         return recur(head, None) 
-        
+    
+    #two pointers
+        # def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # cur, prev = head, None
+        # while cur:
+        #     tmp = cur.next
+        #     cur.next = prev
+        #     prev = cur
+        #     cur = tmp
+        # return prev#prev相当于头节点
