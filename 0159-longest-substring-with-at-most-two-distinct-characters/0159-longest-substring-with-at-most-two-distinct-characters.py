@@ -4,14 +4,14 @@ class Solution:
         left = 0
         cnt = {}
         maxLen = 0
-        for right in range(len(s)):
+        for right in range(len(s)):#保持窗口的expand
             cnt[s[right]] = cnt.get(s[right], 0) + 1
             while left < right and len(cnt) > 2:
-                cnt[s[left]] -= 1
+                cnt[s[left]] -= 1 #不满足条件缩小窗口
                 
                 if cnt[s[left]] == 0:
                     del cnt[s[left]]
-                left += 1
+                left += 1 #缩小完窗口继续更新maxLen
             
             maxLen = max(maxLen, right - left + 1)
         
