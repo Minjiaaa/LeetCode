@@ -17,12 +17,15 @@ class Solution:
         n = len(nums)
         minLen = n
         curSum = 0
+        # preFix = [0] * (n + 1)
         
         if mod == 0:
             return 0
 
         for i in range(n):
-            curSum += nums[i] 
+            # preFix[i] += nums[i] 
+            # curMod = preFix[i] % p
+            curSum += nums[i] #构造前缀和数组出问题
             curMod = curSum % p
             cnt[curMod] = i
             
