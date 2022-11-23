@@ -25,20 +25,21 @@ class Solution:
         
         cnt = 0
         table = {0:1} #计数器初始中默认存在一个哨兵节点
-        preSumModK = 0
+        preSum = 0
         
         #前缀和就是数组求和公式，#设置荒谬的情况，让边界情况的计算也能套上公式
         #构造前缀和数组
         
         for i in range(len(nums)):
-            preSumModK = (nums[i] + preSumModK) % k
-            if preSumModK < 0:
-                preSumModK += k
-            if preSumModK in table:
-                cnt += table[preSumModK] 
-                table[preSumModK] += 1
+            preSum += nums[i] #应该还是prefix公式搞错了
+            if preSum % k < 0:
+                curMod = k + preSum % k
+            curMod = preSum % k
+            if curMod in table:
+                cnt += table[curMod] 
+                table[curMod] += 1
             else:
-                table[preSumModK] = 1
+                table[curMod] = 1
             
         return cnt
                 
