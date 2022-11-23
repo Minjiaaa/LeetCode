@@ -15,5 +15,6 @@ class Solution:
             if oddNum - k in table:
                 cnt += table[oddNum - k]
             table[oddNum] = table.get(oddNum, 0) + 1
+            #也可以通过
             
         return cnt
