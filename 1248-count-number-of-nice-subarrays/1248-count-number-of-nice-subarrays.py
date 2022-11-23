@@ -7,12 +7,13 @@ class Solution:
         for i in range(len(nums)):
             if nums[i] % 2 == 1:
                 oddNum += 1
-            if oddNum in table:
-                table[oddNum] += 1
-            else:
-                table[oddNum] = 1
+            # if oddNum in table:
+            #     table[oddNum] += 1
+            # else:
+            #     table[oddNum] = 1
+            #不能直接写table[oddNum] += 1
             if oddNum - k in table:
                 cnt += table[oddNum - k]
+            table[oddNum] = table.get(oddNum, 0) + 1
             
-        
         return cnt
