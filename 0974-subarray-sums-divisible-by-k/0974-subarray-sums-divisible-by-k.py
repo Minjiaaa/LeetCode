@@ -43,7 +43,23 @@ class Solution:
         return cnt
                 
             
+        preSum = 0
         
+        #前缀和就是数组求和公式，#设置荒谬的情况，让边界情况的计算也能套上公式
+        #构造前缀和数组
+# 这么写效率低，慢，因为要不停计算取模结果，不如直接递推
+#         for i in range(len(nums)):
+#             preSum += nums[i] #应该还是prefix公式搞错了
+#             if preSum % k < 0:
+#                 curMod = k + preSum % k
+#             curMod = preSum % k
+#             if curMod in table:
+#                 cnt += table[curMod] 
+#                 table[curMod] += 1
+#             else:
+#                 table[curMod] = 1
+            
+#         return cnt
         
         
         
