@@ -9,34 +9,50 @@ class Solution:
 #         fast = 0
 #         #如何使用快慢指针找到链表中点 
 #         #如何定义右指针
-#         right 
-        h, length, intv = head, 0, 1
-        while h: h, length = h.next, length + 1
-        res = ListNode(0)
-        res.next = head
-        # merge the list in different intv.
-        while intv < length:
-            pre, h = res, res.next
-            while h:
-                # get the two merge head `h1`, `h2`
-                h1, i = h, intv
-                while i and h: h, i = h.next, i - 1
-                if i: break # no need to merge because the `h2` is None.
-                h2, i = h, intv
-                while i and h: h, i = h.next, i - 1
-                c1, c2 = intv, intv - i # the `c2`: length of `h2` can be small than the `intv`.
-                # merge the `h1` and `h2`.
-                while c1 and c2:
-                    if h1.val < h2.val: pre.next, h1, c1 = h1, h1.next, c1 - 1
-                    else: pre.next, h2, c2 = h2, h2.next, c2 - 1
-                    pre = pre.next
-                pre.next = h1 if c1 else h2
-                while c1 > 0 or c2 > 0: pre, c1, c2 = pre.next, c1 - 1, c2 - 1
-                pre.next = h 
-            intv *= 2
-        return res.next
-
-# 作者：jyd
-# 链接：https://leetcode.cn/problems/sort-list/solution/sort-list-gui-bing-pai-xu-lian-biao-by-jyd/
-# 来源：力扣（LeetCode）
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        if not head or not head.next:
+            return head
+        slow = head
+        fast = head
+        #用快慢指针分成两部分
+        while fast.next and fast.next.next:#这里的终止条件怎么判定的？
+            slow = slow.next
+            fast = fast.next.next
+        
+        #找到左右两部分，把左边部分置空
+        mid = slow.next
+        slow.next = None
+        
+        #开始递归
+        left = self.sortList(head)
+        right = self.sortList(mid)
+        
+        return self.merge(left, right)
+    
+    def merge(self, l1, l2):
+        dummy = ListNode(0)
+        move = dummy
+        while l1 and l2:
+            if l1.val <= l2.val:
+                move.next = l1
+                l1 = l1.next
+            else:
+                move.next = l2
+                l2 = l2.next
+            move = move.next
+        move.next = l1 if l1 else l2
+        return dummy.next
+                
+#用两次recursion会超时  
+#     def merge(self, l1, l2):
+#         if not l1:
+#             return l2
+#         elif not l2:
+#             return l1
+        
+#         if l1.val < l2.val:
+#             node = l1
+#             node.next = self.merge(l1.next, l2)
+#         else:
+#             node = l2
+#             node.next = self.merge(l1, l2.next)
+#         return node
