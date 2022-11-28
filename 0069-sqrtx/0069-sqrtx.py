@@ -6,12 +6,12 @@ class Solution:
         #binary search
         left = 0
         right = x
-        while left < right:
+        while left < right: #
             mid = (left + right + 1) >> 1 # // 2 ** 1
-            if mid <= x // mid:
-                left = mid
+            if mid <= x // mid: #
+                left = mid #
             else:
-                right = mid - 1
+                right = mid - 1 #
         return left
             
             
