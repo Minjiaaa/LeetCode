@@ -8,12 +8,11 @@ class Solution:
         dummy = ListNode(0)
         dummy.next = head
         prev = dummy
-        
-        while head is not None:
-            if head.val == val:
-                prev.next = head.next
+        while prev is not None and prev.next is not None:
+            if prev.next.val == val:
+                prev.next = prev.next.next
             else:
-                prev = head
-            head = head.next
+                prev = prev.next
         
         return dummy.next
+        
