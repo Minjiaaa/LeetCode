@@ -3,7 +3,7 @@ class Solution:
         #edge case
         if x == 1:
             return 1
-        #recursive 
+        #binary search
         left = 0
         right = x
         while left < right:
