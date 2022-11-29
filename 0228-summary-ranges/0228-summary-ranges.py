@@ -1,18 +1,16 @@
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
-        def makeNum(nums, i, j):
-            return str(nums[i]) if i == j else f'{nums[i]}->{nums[j]}'
         
         i = j = 0
-        n = len(nums)
         res = [ ]
         
-        while j < n:
-            while j + 1 < n and nums[j] + 1 == nums[j + 1]:
+        while j < len(nums):
+            while j + 1 < len(nums) and nums[j] + 1 == nums[j + 1]:
                 j += 1
-            res.append(makeNum(nums, i, j))
+            if i == j:
+                res.append(str(nums[i]))
+            else:
+                res.append(f'{nums[i]}->{nums[j]}')
             i = j + 1
             j = i
         return res
-            
-        
