@@ -8,8 +8,9 @@ class Solution:
                 res.append(path[:]) #为什么一定要copy一遍path？
                 return
 
-            for i in range(start_index, n + 1):
+            for i in range(start_index, n - (k - len(path)) + 2):
                 path.append(i)
+                print(path)
                 helper(n, k, i + 1)
                 path.pop()     
         
