@@ -3,8 +3,6 @@ class Solution:
         res = []
         path = []
         
-
-        
         def helper(n, k, start_index):
             if sum(path) > n:
                 return
@@ -13,7 +11,7 @@ class Solution:
                 res.append(path[:])
                 return
             
-            for i in range(start_index, 10 - (k - len(path)) + 1):
+            for i in range(start_index, 9 - (k - len(path)) + 2):
                 path.append(i)
                 helper(n, k, i + 1)
                 path.pop()
