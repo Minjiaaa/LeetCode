@@ -12,13 +12,13 @@ class Solution:
                 return
         
             for i in range(index, len(candidates)):
-                if sum(path) + candidates[i] > target:
-                    continue #不是break
-                else:
-                    path.append(candidates[i])
-                    #print(path)
-                    helper(candidates, target, i)
-                    path.pop()
+                # if sum(path) + candidates[i] > target:
+                #     continue #不是break
+                # else:
+                path.append(candidates[i])
+                #print(path)
+                helper(candidates, target, i)
+                path.pop()
             
         helper(candidates, target, 0)
         return res
