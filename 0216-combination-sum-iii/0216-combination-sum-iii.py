@@ -3,12 +3,17 @@ class Solution:
         res = []
         path = []
         
+
+        
         def helper(n, k, start_index):
+            if sum(path) > n:
+                return
+            
             if sum(path) == n and len(path) == k:
                 res.append(path[:])
                 return
             
-            for i in range(start_index, 10):
+            for i in range(start_index, 10 - (k - len(path)) + 1):
                 path.append(i)
                 helper(n, k, i + 1)
                 path.pop()
