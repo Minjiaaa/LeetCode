@@ -13,10 +13,10 @@ class Solution:
         
             for i in range(index, len(candidates)):
                 if sum(path) + candidates[i] > target:
-                    continue
+                    continue #不是break
                 else:
                     path.append(candidates[i])
-                    print(path)
+                    #print(path)
                     helper(candidates, target, i)
                     path.pop()
             
