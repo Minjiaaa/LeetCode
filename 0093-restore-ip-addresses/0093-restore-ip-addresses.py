@@ -1,26 +1,45 @@
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
-        if len(s) > 12: return []  # 超出最长可能长度
-
-        path = []
         res = []
-        max_len = len(s)
-
-        def backtrack(start_idx):
-            if len(path) == 4:  # 最多只能有4个片段
-                if start_idx == max_len:  # 有可能 start_idx 没遍历到最后一个数字，只有到了才是有效的
-                    res.append('.'.join(path[:]))  # 加入 dot
-                return
-
-            # 横向遍历是找出一个有效片段，因为最大值255所以可以是1个数到3个数，所以+3，另外这里多了len(s)是为了防止指针溢出
-            for idx in range(start_idx, min(start_idx + 3, max_len)):
-                nums = s[start_idx:idx + 1]  # 获取当前片段，注意要+1
-                path.append(nums)
-                # 判断当前片段有效：保证0~255且没有前导0
-                if int(nums) <= 255 and (start_idx == idx or s[start_idx] != '0'):
-                    backtrack(idx + 1)  # 纵向遍历，获取下一个片段
-                path.pop()  # 回溯，丢掉最后加入的片段
+        '''
+        本质切割问题使用回溯搜索法，本题只能切割三次，所以纵向递归总共四层
+        因为不能重复分割，所以需要start_index来记录下一层递归分割的起始位置
+        添加变量point_num来记录逗号的数量[0,3]
+        '''
+        # 判断字符串s在左闭又闭区间[start, end]所组成的数字是否合法
+        def isvalid(s, start, end):
+            if start > end:
+                return False
+            # 段位以0为开头的数字不合法
+            if s[start] == '0' and start != end:
+                return False
+            
+            if not 0 <= int(s[start:end+1]) <= 255:
+                return False
+            
+            return True
         
-        backtrack(0)
+        
+        def helper(s, index, point_num):
+            #Base case
+            if point_num == 3:
+                if isvalid(s, index, len(s) - 1): #这里如何判断s的长度
+                    res.append(s[:])
+                return
+            
+            for i in range(index, len(s)):
+                # [index, i]就是被截取的子串
+                if isvalid(s, index, i):
+                    s = s[:i+1] + '.' + s[i+1:]
+                    helper(s, i + 2, point_num + 1)
+                        # 在填入.后，下一子串起始后移2位
+                    s = s[:i+1] + s[i+2:] #回溯
+                else:
+                    break
+        if len(s) > 12:
+            return []
+        helper(s, 0, 0)
         return res
+            
+            
         
