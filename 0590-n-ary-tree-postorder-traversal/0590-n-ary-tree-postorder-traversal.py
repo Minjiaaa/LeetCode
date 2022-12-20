@@ -7,15 +7,28 @@ class Node:
 """
 
 class Solution:
-    def __init__(self):
-        self.res = []
     def postorder(self, root: 'Node') -> List[int]:
+#         if not root:
+#             return []
+#         for child in root.children:
+#             self.postorder(child)
+#         self.res.append(root.val)
+#         return self.res
+        
+#         stack = [root]
+#         [3, 2, 4]
+        
+#         stack = [5, 6]
+        
+        
+#         ans = [1, 4, 2, 3]
         if not root:
             return []
-        for child in root.children:
-            self.postorder(child)
-        self.res.append(root.val)
-        return self.res
+        res = []
+        stack = [root]
         
-        
-        
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            stack.extend(node.children)
+        return res[::-1]
