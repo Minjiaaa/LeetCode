@@ -5,25 +5,25 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> s = "A man, a plan, a canal: Panama"
+<pre style="position: relative;"><strong>Input:</strong> s = "A man, a plan, a canal: Panama"
 <strong>Output:</strong> true
 <strong>Explanation:</strong> "amanaplanacanalpanama" is a palindrome.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> s = "race a car"
+<pre style="position: relative;"><strong>Input:</strong> s = "race a car"
 <strong>Output:</strong> false
 <strong>Explanation:</strong> "raceacar" is not a palindrome.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong class="example">Example 3:</strong></p>
 
-<pre><strong>Input:</strong> s = " "
+<pre style="position: relative;"><strong>Input:</strong> s = " "
 <strong>Output:</strong> true
 <strong>Explanation:</strong> s is an empty string "" after removing non-alphanumeric characters.
 Since an empty string reads the same forward and backward, it is a palindrome.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
