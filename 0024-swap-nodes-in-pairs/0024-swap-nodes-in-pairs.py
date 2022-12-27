@@ -5,18 +5,18 @@
 #         self.next = next
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = ListNode(next = head)
-        prev = dummy
-        cur = head
-        while cur and cur.next:
-            tmp = cur.next
-            cur.next = tmp.next
-            tmp.next = cur
-            prev.next = tmp
-            
-            prev = cur
-            cur = cur.next
-            #这里不理解
-        return dummy.next
-            
+        # Base case: If the list has no node or has only one node left.
+        if not head or not head.next:
+            return head
+        
+        # Nodes to be swapped
+        first_node = head
+        second_node = head.next
+        
+        # Swapping
+        first_node.next = self.swapPairs(second_node.next)
+        second_node.next = first_node
+        
+        # now the head is the second node
+        return second_node
         
