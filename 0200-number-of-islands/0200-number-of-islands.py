@@ -1,54 +1,49 @@
+DIRECTIONS = [(1, 0), (0, -1), (-1, 0), (0,1)]
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        if not grid:
-            return 0
+        # # 特殊情况处理
+        # if not grid or not grid[0]:
+        #     return 0
         
-        rows, cols = len(grid), len(grid[0])
-        visit = set()
         islands = 0
-        
-        def bfs(r, c):
-            # grid[r][c] = "0"
-            q = collections.deque()
-            q.append((r, c))
-            visit.add((r, c))
-            while q:
-                r, c = q.popleft()
-                for x, y in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
-                    rd, cd = r + x, c + y #变量更新要注意
-                    if (0 <= rd < rows and 
-                        0 <= cd < cols and 
-                        grid[rd][cd] == "1" and 
-                        (rd, cd) not in visit):
-                        q.append((rd, cd))
-                        # grid[rd][cd] = 0
-                        visit.add((rd, cd))
-                        
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c] == "1" and (r, c) not in visit:
-                    bfs(r, c)
+        #记录某点是否被BFS过，如果之前已经被BFS过，不应该再次被BFS
+        visited = set()
+
+        # 遍历矩阵中的每一个点
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                # 如果为海洋，无需BFS
+                # 如果该点已经被visited, 无需做荣誉遍历，重复计算
+                if grid[i][j] == "1" and (i, j) not in visited:
+                    self.bfs(grid, i, j, visited)
                     islands += 1
         return islands
-                    
-        
-#     def numIslands(self, grid: List[List[str]]) -> int:
-#         def bfs(i, j):
-#             grid[i][j] = '0'
-#             q = deque([(i, j)])
-#             while q:
-#                 i, j = q.popleft()
-#                 for a, b in [[0, -1], [0, 1], [-1, 0], [1, 0]]:
-#                     x, y = i + a, j + b
-#                     if 0 <= x < m and 0 <= y < n and grid[x][y] == '1':
-#                         q.append((x, y))
-#                         grid[x][y] = 0
 
-#         m, n = len(grid), len(grid[0])
-#         ans = 0
-#         for i in range(m):
-#             for j in range(n):
-#                 if grid[i][j] == '1':
-#                     bfs(i, j)
-#                     ans += 1
-#         return ans
+    # 从一块土地出发，通过BFS，遍历整个岛屿
+    def bfs(self, grid, x, y, visited):
+        queue = deque([(x, y)])
+        visited.add((x, y))
+        while queue:
+            x, y = queue.popleft()
+            # 遍历上下左右四个方向
+            for x_, y_ in DIRECTIONS:
+                next_x = x + x_
+                next_y = y + y_
+                if not self.is_valid(grid, next_x, next_y, visited):
+                    continue
+                #print(grid[x][y])
+                #print(next_x, next_y)
+                queue.append((next_x, next_y))
+                visited.add((next_x, next_y))
+
+    # 判断一个点是否可以被BFS
+    def is_valid(self, grid, x, y, visited):
+        n, m = len(grid), len(grid[0])
+            #如果出界，返回false
+        if not (0 <= x < n and 0 <= y < m):
+            return False
+        # 如果已经BFS过，不要再次BFS，避免： 1. 死循环 2. 冗余的BFS变量
+        if (x, y) in visited:
+            return False
+        # 如果是1， 则为true；如果0， 则为False
+        return grid[x][y] == "1"
