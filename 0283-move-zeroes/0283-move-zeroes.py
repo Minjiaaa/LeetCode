@@ -3,24 +3,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        # 将两个指针先指向数组的头部
+        slow, fast = 0, 0
+        while fast < len(nums):
+            # 遇到非0数复制给新数组指针指向的位置
+            if nums[fast] != 0:
+                nums[slow] = nums[fast]
+                # 将left往后移动一位
+                slow += 1
+            fast += 1
         
-#         if len(nums) == 0:
-#             return nums
+        while slow < len(nums):
+            nums[slow] = 0
+            slow += 1
         
-#         else:
-#             for i in range(len(nums) - 1):
-#                 while nums[i] == 0:
-#                     nums[i], nums[i+1] = nums[i+1], nums[i]
-#         #             i += 1
-#         # i = 0, nums[0], nums[1] = nums[1], nums[0] 1, 0, 0, 3, 12
-#         #                                             1, 0, 0, 3, 12
-#         #                                              1, 0, 3, 0, 12   
-#     # 要使用双指针,慢指针只有在满足条件的时候才会往前移动
-        index = 0
-        for i in range(len(nums)):
-            if nums[i] != 0:
-                nums[index] = nums[i]
-                index += 1
-        
-        for j in range(index, len(nums)):
-            nums[j] = 0
