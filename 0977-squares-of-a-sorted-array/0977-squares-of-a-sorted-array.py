@@ -3,14 +3,15 @@ class Solution:
         n = len(nums)
         i, j, k = 0, n - 1, n - 1
         res = [-1] * n
-        while i <= j and k >= 0:
-            if nums[i] * nums[i] >= nums[j] * nums[j]:
-                res[k] = nums[i] * nums[i]
-                i += 1
-            else:
-                res[k] = nums[j] * nums[j]
+        while i <= j:
+            l2 = nums[i] ** 2
+            r2 = nums[j] ** 2
+            if l2 <= r2:
+                res[k] = r2
                 j -= 1
+            else:
+                res[k] = l2
+                i += 1
             k -= 1
         return res
-            
             
