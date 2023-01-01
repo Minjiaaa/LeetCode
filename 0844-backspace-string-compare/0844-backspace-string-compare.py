@@ -5,9 +5,7 @@ class Solution:
             for c in S:
                 if c != "#":
                     res.append(c)
-                    print(res)
                 elif res:
                     res.pop()
-                    print(res)
             return "".join(res)
         return build(s) == build(t)
