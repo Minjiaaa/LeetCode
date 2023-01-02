@@ -1,19 +1,26 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if s is None:
-            return None
+        if not s:
+            return ""
         
-        for length in range(len(s), 0, -1):
-            for i in range(len(s) - length + 1):
-                if self.is_palindrome(s, i, i + length - 1):
-                    return s[i : i + length]
-        return ""
-    
-    # 判断是否为回文串的子函数
-    def is_palindrome(self, s, left, right):
-        while left < right and s[left] == s[right]:
-            left += 1
-            right -= 1
+        start, longest = 0, 0
+        for middle in range(len(s)):
+            # add
+            left, right = middle, middle
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            if longest < right - left - 1:
+                longest = right - left - 1 # right = left + 1 - 2
+                start = left + 1
             
-        return left >= right
-        
+            left, right = middle, middle + 1
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            if longest < right - left - 1:
+                longest = right - left - 1 # right = left + 1 - 2
+                start = left + 1
+            
+        return s[start: start + longest]
+            
