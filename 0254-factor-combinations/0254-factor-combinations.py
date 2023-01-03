@@ -5,6 +5,8 @@ class Solution:
         def helper(n, x):
             if cur:
                 res.append(cur[:] + [n])
+                # print(res)
+                # print(n)
             
             for i in range(x, int(pow(n, 0.5)) + 1):
                 if n % i == 0:
